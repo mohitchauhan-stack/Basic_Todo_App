@@ -13,7 +13,7 @@ const TodoList = () => {
 
   let addNewTodo = () => {
     setTodosArray((prevTodoArray) => {
-      return [...prevTodoArray, { todo: newTodo, id: uuidv4() }];
+      return [...prevTodoArray, { todo: newTodo, id: uuidv4(), isDone: false }];
     });
     setNewTodo("");
   };
@@ -38,7 +38,18 @@ const TodoList = () => {
   };
 
   let upperCaseOne = (id) => {
-    console.log(id);
+    setTodosArray((prevTodoArray) =>
+      prevTodoArray.map((prevTodo) => {
+        if (prevTodo.id === id) {
+          return {
+            ...prevTodo,
+            todo: prevTodo.todo.toUpperCase(),
+          };
+        } else {
+          return prevTodo;
+        }
+      }),
+    );
   };
 
   return (
@@ -71,7 +82,9 @@ const TodoList = () => {
               className="my-2 bg-amber-300 flex flex-col items-start p-2 rounded-sm"
               key={todo.id}
             >
-              <span>{todo.todo}</span>
+              <span className={todo.isDone ? "line-through" : ""}>
+                {todo.todo}
+              </span>
               <div className="btn_container flex gap-2">
                 <button
                   onClick={() => deleteTodo(todo.id)}
