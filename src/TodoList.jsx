@@ -52,6 +52,21 @@ const TodoList = () => {
     );
   };
 
+  let markDone = (id) => {
+    setTodosArray((prevTodoArray) =>
+      prevTodoArray.map((prevTodo) => {
+        if (prevTodo.id === id) {
+          return {
+            ...prevTodo,
+            isDone: true,
+          };
+        } else {
+          return prevTodo;
+        }
+      }),
+    );
+  };
+
   return (
     <div className="mx-auto max-w-2xs h-full flex flex-col items-center">
       <div className="todo_app_container">
@@ -97,6 +112,12 @@ const TodoList = () => {
                   className="bg-red-500 text-white px-2 rounded-sm cursor-pointer"
                 >
                   UpperCase One
+                </button>
+                <button
+                  onClick={() => markDone(todo.id)}
+                  className="bg-red-500 text-white px-2 rounded-sm cursor-pointer"
+                >
+                  Done
                 </button>
               </div>
             </li>
