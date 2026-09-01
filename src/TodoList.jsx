@@ -6,6 +6,7 @@ const TodoList = () => {
     {
       todo: "sample todo",
       id: uuidv4(),
+      isDone: false,
     },
   ]);
 
@@ -28,27 +29,12 @@ const TodoList = () => {
     );
   };
 
-  let upperCaseAll = () => {
+  let marksAllAsDone = () => {
     setTodosArray((prevTodoArray) =>
       prevTodoArray.map((prevTodo) => ({
         ...prevTodo,
-        todo: prevTodo.todo.toUpperCase(),
+        isDone: true,
       })),
-    );
-  };
-
-  let upperCaseOne = (id) => {
-    setTodosArray((prevTodoArray) =>
-      prevTodoArray.map((prevTodo) => {
-        if (prevTodo.id === id) {
-          return {
-            ...prevTodo,
-            todo: prevTodo.todo.toUpperCase(),
-          };
-        } else {
-          return prevTodo;
-        }
-      }),
     );
   };
 
@@ -108,12 +94,6 @@ const TodoList = () => {
                   Delete
                 </button>
                 <button
-                  onClick={() => upperCaseOne(todo.id)}
-                  className="bg-red-500 text-white px-2 rounded-sm cursor-pointer"
-                >
-                  UpperCase One
-                </button>
-                <button
                   onClick={() => markDone(todo.id)}
                   className="bg-red-500 text-white px-2 rounded-sm cursor-pointer"
                 >
@@ -125,10 +105,10 @@ const TodoList = () => {
         </ul>
         <br />
         <button
-          onClick={upperCaseAll}
+          onClick={marksAllAsDone}
           className="border-[.5px]  px-2 rounded-sm mx-2 cursor-pointer "
         >
-          UpperCase All
+          All Done
         </button>
       </div>
     </div>
